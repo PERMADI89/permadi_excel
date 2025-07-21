@@ -5,7 +5,7 @@ from datetime import datetime
 import json
 
 def connect_to_gsheet():
-    scope = ["https://spreadsheets.google.com/feeds",
+    scope = ["https://docs.google.com/spreadsheets/d/1Ex_gkuZC8r6qNSt-VvB2trJ1efqQGdKHWbW4tFmfbJ4/edit?hl=id&gid=0#gid=0",
              "https://www.googleapis.com/auth/drive"]
     creds_dict = json.loads(st.secrets["GSHEET_CREDS"])
     creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
