@@ -1,14 +1,23 @@
-# Streamlit Form to Google Sheets
+# Streamlit Input Form ke Google Spreadsheet
 
-A simple Streamlit web app to input data and save it to Google Sheets.
+Web sederhana berbasis Streamlit untuk menginput data ke Google Spreadsheet.
 
-## Setup
+## ✅ Fitur
 
-1. Create a Google Service Account and enable Google Sheets & Drive API.
-2. Share your target spreadsheet with the service account email.
-3. Add your JSON credentials to Streamlit Cloud Secrets.
-4. Replace `SPREADSHEET_ID` in `app.py` with your actual spreadsheet ID.
+- Input Nama, Email, dan Aktivitas
+- Tersimpan otomatis ke tab **Data** dalam Spreadsheet
 
-## Deploy
+## 🛠 Cara Deploy
 
-Use [Streamlit Cloud](https://streamlit.io/cloud) and link to your GitHub repository.
+1. Buat file `creds.json` dari Google Cloud Service Account
+2. Ambil Spreadsheet ID dari URL: `https://docs.google.com/spreadsheets/d/SPREADSHEET_ID/edit`
+3. Share spreadsheet ke email service account sebagai **Editor**
+4. Di Streamlit Cloud, tambahkan `GSHEET_CREDS` di **Secrets** seperti ini:
+
+```
+GSHEET_CREDS = '''
+{ JSON DARI FILE creds.json }
+'''
+```
+
+5. Jalankan aplikasi di Streamlit Cloud
