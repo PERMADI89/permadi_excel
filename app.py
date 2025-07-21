@@ -14,10 +14,10 @@ def connect_to_gsheet():
     worksheet = sheet.worksheet("Data")
     return worksheet
 
-st.title("Form Input ke Google Spreadsheet")
+st.title("📋 Formulir Input Data ke Google Sheets")
 
-with st.form("input_form"):
-    nama = st.text_input("Nama")
+with st.form("form"):
+    nama = st.text_input("Nama Lengkap")
     email = st.text_input("Email")
     aktivitas = st.text_area("Aktivitas")
     submit = st.form_submit_button("Kirim")
