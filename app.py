@@ -2,18 +2,18 @@ import streamlit as st
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from datetime import datetime
-import json
 
+# Koneksi ke Google Sheet
 def connect_to_gsheet():
-    scope = ["https://docs.google.com/spreadsheets/d/1Ex_gkuZC8r6qNSt-VvB2trJ1efqQGdKHWbW4tFmfbJ4/edit?hl=id&gid=0#gid=0",
+    scope = ["https://spreadsheets.google.com/feeds",
              "https://www.googleapis.com/auth/drive"]
-    creds_dict = json.loads(st.secrets["GSHEET_CREDS"])
-    creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
+    creds = ServiceAccountCredentials.from_json_keyfile_name("creds.json", scope)
     client = gspread.authorize(creds)
-    sheet = client.open_by_key("SPREADSHEET_ID")  # Ganti dengan ID spreadsheet kamu
+    sheet = client.open_by_key("SPREADSHEET_ID")  # ganti dengan ID asli
     worksheet = sheet.worksheet("Data")
     return worksheet
 
+# Form Input
 st.title("Formulir Input Data")
 
 with st.form("data_form"):
