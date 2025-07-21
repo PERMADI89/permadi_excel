@@ -7,11 +7,13 @@ from datetime import datetime
 def connect_to_gsheet():
     scope = ["https://spreadsheets.google.com/feeds",
              "https://www.googleapis.com/auth/drive"]
-    creds = ServiceAccountCredentials.from_json_keyfile_name("creds.json", scope)
+    creds_dict = json.loads(st.secrets["GSHEET_CREDS"])
+    creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
     client = gspread.authorize(creds)
-    sheet = client.open_by_key("SPREADSHEET_ID")  # ganti dengan ID asli
+    sheet = client.open_by_key("SPREADSHEET_ID")  # ← ganti dengan ID kamu
     worksheet = sheet.worksheet("Data")
     return worksheet
+
 
 # Form Input
 st.title("Formulir Input Data")
