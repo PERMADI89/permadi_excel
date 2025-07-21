@@ -10,7 +10,7 @@ def connect_to_gsheet():
     creds_dict = json.loads(st.secrets["GSHEET_CREDS"])
     creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
     client = gspread.authorize(creds)
-    sheet = client.open_by_key("1Ex_gkuZC8r6qNSt-VvB2trJ1efqQGdKHWbW4tFmfbJ4")
+    sheet = client.open_by_key("1DMev-U5JWzjFy5YxWLoMspuYshvHcwn0VzDQT1QjAmA")
     worksheet = sheet.worksheet("Data")
     return worksheet
 
