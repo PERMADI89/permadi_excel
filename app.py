@@ -3,6 +3,7 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import json
 
+
 # Function untuk load dan cek login user
 import ast
 
@@ -17,10 +18,11 @@ def login_user(username, password):
 # Koneksi ke Google Sheets
 @st.cache_resource
 def connect_gsheet():
-    scope = ["https://spreadsheets.google.com/feeds","https://www.googleapis.com/auth/drive"]
-    creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
+    credentials_dict = json.loads(st.secrets["GOOGLE_CREDENTIALS_JSON"])
+    creds = Credentials.from_service_account_info(credentials_dict)
     client = gspread.authorize(creds)
-    return client.open_by_key(SPREADSHEET_ID).sheet1
+    spreadsheet_id = st.secrets["SPREADSHEET_ID"]
+    return client.open_by_key(spreadsheet_id).sheet1
 
 # — Mulai aplikasi —
 SPREADSHEET_ID = "1Ex_gkuZC8r6qNSt-VvB2trJ1efqQGdKHWbW4tFmfbJ4"
