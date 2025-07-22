@@ -4,7 +4,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 
 # Konfigurasi
-SPREADSHEET_ID = "PASTE_SPREADSHEET_ID_KAMU"
+SPREADSHEET_ID = "1Ex_gkuZC8r6qNSt-VvB2trJ1efqQGdKHWbW4tFmfbJ4"
 
 # Scope dan auth
 scope = ["https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive"]
