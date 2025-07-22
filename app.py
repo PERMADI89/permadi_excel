@@ -1,29 +1,22 @@
 import streamlit as st
+import pandas as pd
 import gspread
-from oauth2client.service_account import ServiceAccountCredentials
-from datetime import datetime
-import json
+from google.oauth2.service_account import Credentials
 
-def connect_to_gsheet():
-    scope = ["https://spreadsheets.google.com/feeds",
-             "https://www.googleapis.com/auth/drive"]
-    creds_dict = json.loads(st.secrets["GSHEET_CREDS"])
-    creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
-    client = gspread.authorize(creds)
-    sheet = client.open_by_key("1Ex_gkuZC8r6qNSt-VvB2trJ1efqQGdKHWbW4tFmfbJ4")
-    worksheet = sheet.worksheet("Data")
-    return worksheet
+# Konfigurasi
+SPREADSHEET_ID = "PASTE_SPREADSHEET_ID_KAMU"
 
-st.title("📋 Formulir Input Data ke Google Sheets")
+# Scope dan auth
+scope = ["https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive"]
+creds = Credentials.from_service_account_file("service_account.json", scopes=scope)
+client = gspread.authorize(creds)
 
-with st.form("form"):
-    nama = st.text_input("Nama Lengkap")
-    email = st.text_input("Email")
-    aktivitas = st.text_area("Aktivitas")
-    submit = st.form_submit_button("Kirim")
+# Load data dari spreadsheet
+sheet = client.open_by_key(SPREADSHEET_ID)
+worksheet = sheet.sheet1
+data = worksheet.get_all_records()
+df = pd.DataFrame(data)
 
-if submit:
-    ws = connect_to_gsheet()
-    waktu = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    ws.append_row([waktu, nama, email, aktivitas])
-    st.success("✅ Data berhasil dikirim ke Google Spreadsheet!")
+# Tampilkan di Streamlit
+st.title("Data dari Google Spreadsheet")
+st.dataframe(df)
