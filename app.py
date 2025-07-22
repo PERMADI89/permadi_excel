@@ -21,7 +21,7 @@ def connect_gsheet():
     return client.open_by_key(SPREADSHEET_ID).sheet1
 
 # — Mulai aplikasi —
-SPREADSHEET_ID = "ISI_SPREADSHEET_ID_DI_SINI"
+SPREADSHEET_ID = "1Ex_gkuZC8r6qNSt-VvB2trJ1efqQGdKHWbW4tFmfbJ4"
 
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
