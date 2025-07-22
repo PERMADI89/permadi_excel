@@ -4,9 +4,11 @@ from oauth2client.service_account import ServiceAccountCredentials
 import json
 
 # Function untuk load dan cek login user
+import ast
+
 def load_users():
-    with open("users.json", "r") as f:
-        return json.load(f)
+    users_raw = st.secrets["users"]
+    return ast.literal_eval(users_raw)
 
 def login_user(username, password):
     users = load_users()
