@@ -7,7 +7,7 @@ import json
 st.set_page_config(page_title="Permadi Excel", layout="wide")
 
 # Ambil kredensial dari secrets
-service_account_info = json.loads(st.secrets["google_service_account"])
+service_account_info = st.secrets["google_service_account"]
 creds = Credentials.from_service_account_info(service_account_info)
 
 # Buka Spreadsheet
